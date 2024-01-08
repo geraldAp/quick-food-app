@@ -33,6 +33,11 @@ export default defineType({
       type: 'boolean',
     }),
     defineField({
+      title: 'Rating',
+      name: 'rating',
+      type: 'number',
+    }),
+    defineField({
       title: 'Category',
       name: 'mealCategory',
       type: 'reference',

@@ -41,6 +41,7 @@ export const getTopPicks = () => {
       name,
       description,
       image,
+      rating,
       'category': mealCategory->name,
       price,
       hotPick,
