@@ -6,6 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { selectRestaurant } from "../store/slices/RestaurantSlice";
+import { urlFor } from "../sanity";
 import {
   removeFromCart,
   selectCartItems,
@@ -109,8 +110,7 @@ const CartScreen = ({ navigation }) => {
       </ScrollView>
       {/* totals  */}
       <View
-        style={{ backgroundColor: themeColors.bgColor(0.2) }}
-        className="p-6 px-8 rounded-t-3xl space-y-4 "
+        className="p-6 px-8 rounded-t-3xl bg-[#f97316] space-y-4 "
       >
         <View className="flex-row justify-between">
           <Text className="text-gray-700">Subtotal</Text>

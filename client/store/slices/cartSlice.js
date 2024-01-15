@@ -38,7 +38,10 @@ export const selectCartItems = (state) => state.cart.items;
 // get a particular cart item
 export const selectCartItemsById = (state, id) =>
   state.cart.items.filter((item) => item._id === id);
+// cart total
 export const selectCartTotal = (state) =>
   state.cart.items.reduce((total, item) => total + item.price, 0);
+// total item count
+export const selectCartCount = (state) => state.cart.items.length;
 
 export default cartSlice.reducer;
