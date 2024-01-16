@@ -40,6 +40,7 @@ export default function TopPicks() {
           keyExtractor={(item) => item._id}
           renderItem={renderTopPick}
           ItemSeparatorComponent={ItemSeparator}
+          showsVerticalScrollIndicator={false} 
           contentContainerStyle={{ paddingBottom: 64 }}
         />
       )}

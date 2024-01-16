@@ -34,7 +34,7 @@ const MealCards = ({
     _id,
   };
   const isMealSaved = favorites.some((meal) => meal._id === _id);
-  
+
   const handlePress = () => {
     navigation.navigate("mealDetails", {
       name,
@@ -47,9 +47,10 @@ const MealCards = ({
     });
   };
 
-  const favoritesHandler = () => {
-    if (favorites.includes(_id)) {
-      dispatch(deleteFavoriteMeal(_id));
+  const favoritesHandler = (_id) => {
+    const exists = favorites.some((favMeal) => favMeal._id === _id)
+    if (exists) {
+      dispatch(deleteFavoriteMeal({ id: _id }));
     } else {
       dispatch(addFavoriteMeals(meal));
     }
@@ -77,11 +78,11 @@ const MealCards = ({
         <View className="py-1 px-2 bg-white flex-1 ">
           <View className="flex-row justify-between mb-1 ">
             <Text className="text-base font-semibold">{name}</Text>
-             <FavoritesButton
+            <FavoritesButton
               color="orange"
               icon={isMealSaved ? "heart" : "heart-o"}
               size={25}
-              press={favoritesHandler}
+              press={() => favoritesHandler(_id)}
             />
           </View>
           {/* price and category */}

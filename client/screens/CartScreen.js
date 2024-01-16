@@ -26,7 +26,6 @@ const CartScreen = ({ navigation }) => {
     // grouped initially starts as an empty object
     // the condition below assumes the id are key values
     // so basically the items id is equal to the key value push those item data into the array or create an array with and place the items in it
-
     const items = cartItems.reduce((group, item) => {
       if (group[item.id]) {
         group[item.id].push(item);
