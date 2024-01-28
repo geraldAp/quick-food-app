@@ -11,20 +11,16 @@ import React, { useEffect, useState } from "react";
 import { Ionicons, Entypo, Feather } from "@expo/vector-icons";
 import { themeColors } from "../theme/theme";
 import Categories from "../components/categories";
-import { featured } from "../components/constants/dummyData";
-import FeaturedRow from "../components/featuredRow";
-import { getFeaturedRestaurants } from "../api";
 import TopPicks from "../components/TopPicks";
+import CategoryView from "../components/CategoryView";
 
 export default function Home() {
-  const [featuredRestaurants, setFeaturedRestaurants] = useState([]);
+  const [view, setView] = useState("TopPicks");
+  const [category, setCategory] = useState("");
 
-  // useEffect(() => {
-  //   // getFeaturedRestaurants().then((data) => {
-  //   //   console.log("Data", data);
-  //   //   setFeaturedRestaurants(data)
-  //   // });
-  // }, []);
+  const changeView = (view) => {
+    setView(view);
+  };
 
   return (
     <SafeAreaView className="bg-white flex-1">
@@ -33,7 +29,6 @@ export default function Home() {
       <View className="flex-row items-center space-x-2 px-4 pb-2">
         {/* search bar  */}
         <View className=" flex-row flex flex-1 items-center p-3 rounded-full border border-gray-300">
-         
           <View className="flex-row items-center space-x-1 border-0 border-l-2 pl-2  border-l-gray-300">
             <Entypo name="location-pin" size={20} color="gray" />
             <Text className="text-gray-600">East Legon, Accra</Text>
@@ -48,10 +43,14 @@ export default function Home() {
       </View>
       {/* main */}
       {/* Categories */}
-      <Categories />
+      <Categories
+        category={category}
+        setCategory={setCategory}
+        changeView={changeView}
+      />
 
       {/* Top picks  */}
-      <TopPicks />
+      {view === "TopPicks" ? <TopPicks /> : <CategoryView category={category} />}
     </SafeAreaView>
   );
 }

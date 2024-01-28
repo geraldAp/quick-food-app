@@ -58,7 +58,7 @@ const MealCards = ({
 
   return (
     <Pressable className="shadow-md" onPress={handlePress}>
-      <View className=" h-[250px] overflow-hidden shadow-xl bg-gray-200 rounded-3xl">
+      <View className=" h-[350px] overflow-hidden shadow-xl bg-gray-200 rounded-3xl">
         <View className="w-full relative h-[60%]">
           <Image
             className="w-[100%] h-[100%] "
@@ -75,9 +75,9 @@ const MealCards = ({
             </View>
           </View>
         </View>
-        <View className="py-1 px-2 bg-white flex-1 ">
+        <View className="py-2 px-3 justify-center bg-white flex-1 ">
           <View className="flex-row justify-between mb-1 ">
-            <Text className="text-base font-semibold">{name}</Text>
+            <Text className="text-base capitalize font-semibold">{name}</Text>
             <FavoritesButton
               color="orange"
               icon={isMealSaved ? "heart" : "heart-o"}

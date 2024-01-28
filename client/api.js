@@ -34,6 +34,21 @@ export const getMealsById = (id) => {
   );
 };
 
+export const getMealsByCategory = (category) => {
+  return sanityQuery(
+    `*[_type=='meal' && mealCategory->name == $category]{
+      _id,
+      name,
+      description,
+      image,
+    'category': mealCategory->name,
+      price,
+      hotPick,
+  }`,
+    { category }
+  );
+};
+
 export const getTopPicks = () => {
   return sanityQuery(
     `*[_type=='meal' && hotPick == true]{

@@ -5,23 +5,44 @@ import FavoritesButton from "../components/ui/FavoritesButton";
 import { useDispatch, useSelector } from "react-redux";
 import StarRating from "../components/ui/StarRating";
 import FontAwesome5Buttons from "../components/ui/iconbuttons/FontAwesome5Buttons";
-import RegularButton from "../components/ui/RegularButton";
 import { addToCart } from "../store/slices/cartSlice";
-
+import {
+  selectFavoriteMeals,
+  addFavoriteMeals,
+  deleteFavoriteMeal,
+} from "../store/slices/mealSlice";
 export default function MealInfoScreen({ route, navigation: { goBack } }) {
   const dispatch = useDispatch();
   const { image, rating, name, price, category, description, _id } =
     route.params;
-
+    const meal = {
+      name,
+      image,
+      rating,
+      price,
+      category,
+      description,
+      _id,
+    };
   const cartData = { image, name, price, category, _id };
   const handleIconPress = () => {
     goBack();
   };
-
+  const favorites = useSelector(selectFavoriteMeals);
+  const isMealSaved = favorites.some((meal) => meal._id === _id);
   const handleButtonPress = () => {
     dispatch(addToCart({ ...cartData }));
     console.log("button pressed");
     goBack();
+  };
+
+  const favoritesHandler = (_id) => {
+    const exists = favorites.some((favMeal) => favMeal._id === _id);
+    if (exists) {
+      dispatch(deleteFavoriteMeal({ id: _id }));
+    } else {
+      dispatch(addFavoriteMeals(meal));
+    }
   };
 
   return (
@@ -47,7 +68,12 @@ export default function MealInfoScreen({ route, navigation: { goBack } }) {
           <View className="rounded-full items-center shadow-md p-2 bg-[#f1b576] opacity-95">
             <Text className="text-sm text-[#f97316] ">{category}</Text>
           </View>
-          <FavoritesButton color="orange" icon="heart-o" size={25} />
+          <FavoritesButton
+            color="orange"
+            icon={isMealSaved ? "heart" : "heart-o"}
+            size={25}
+            press={() => favoritesHandler(_id)}
+          />
         </View>
         {/* name of dish */}
         <Text className="text-3xl font-semibold">{name}</Text>

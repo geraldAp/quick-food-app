@@ -7,11 +7,10 @@ import {
   selectCartItems,
   selectCartTotal,
   addToCart,
-  emptyCart
+  emptyCart,
 } from "../store/slices/cartSlice";
 import IoniconsButtons from "../components/ui/iconbuttons/IoniconButtons";
 import FontAwesome5Buttons from "../components/ui/iconbuttons/FontAwesome5Buttons";
-import { TouchableOpacity } from "react-native";
 
 const Cart = ({ navigation, route }) => {
   const dispatch = useDispatch();
@@ -79,22 +78,33 @@ const Cart = ({ navigation, route }) => {
         />
       </View>
       {/* heading and trash can */}
-      <View className='flex-row mb-2 p-4 items-center  justify-between'>
+      <View className="flex-row mb-2 p-4 items-center  justify-between">
         <View className="">
           <Text className="text-3xl mb-1">My Cart List</Text>
           <View className="w-16 h-1 bg-[#f97316]"></View>
         </View>
-        <FontAwesome5Buttons name={'trash'} size={26} color={'orange'} press={()=> dispatch(emptyCart())}/>
+        <FontAwesome5Buttons
+          name={"trash"}
+          size={26}
+          color={"orange"}
+          press={() => dispatch(emptyCart())}
+        />
       </View>
       {/* rest of the body */}
       <View className="flex-1   ">
+        {/* first view goes here   */}
         <View style={{ flex: 2 }} className="px-4">
-          <FlatList
-            data={Object.values(groupedItems)}
-            keyExtractor={(item) => item[0]._id}
-            renderItem={renderCartItem}
-          />
+          {groupedItems.length > 0 ? (
+            <FlatList
+              data={Object.values(groupedItems)}
+              keyExtractor={(item) => item[0]._id}
+              renderItem={renderCartItem}
+            />
+          ) : (
+            <Text className="text-2xl font-bold mb-4">Your cart is empty</Text>
+          )}
         </View>
+
         <View style={{ flex: 1 }} className="bg-[#f09351] p-4 rounded-t-3xl">
           {/* Content for the second view goes here */}
           <View className="flex-row justify-between border-b border-gray-100 pb-2 items-center  mb-3">

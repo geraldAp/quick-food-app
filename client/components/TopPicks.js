@@ -12,7 +12,7 @@ export default function TopPicks() {
   const { isPending, isError, data, error } = useQuery({
     queryKey: ["topPicks"],
     queryFn: getTopPicks,
-  });
+  }); 
   useEffect(() => {
     if (data) {
       console.log("data to check if this works ", data);

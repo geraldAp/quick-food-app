@@ -24,6 +24,7 @@
     "react-native-feather": "^1.1.2",
     "react-native-maps": "1.7.1",
     "react-native-masonry-list": "^2.16.1",
+    "react-native-toast-message": "^2.2.0",
     "react-redux": "^9.0.2"
   },
   "devDependencies": {
